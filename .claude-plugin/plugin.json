@@ -1,0 +1,25 @@
+{
+  "name": "sr-blog-harness",
+  "description": "블로그(~/IdeaProjects/blog, SeokRae/blog, Jekyll + Type Theme) 포스트 작성부터 발행까지 조율하는 파이프라인 하네스 — 근거 수집(researcher) → 초안(writer) → 사실 검증(verifier) → 윤문(editor) → 발행(publisher, Issue→PR)",
+  "version": "0.1.0",
+  "author": {
+    "name": "SeokRae",
+    "email": "kslbsh@gmail.com"
+  },
+  "homepage": "https://github.com/SeokRae/sr-blog-harness",
+  "repository": "git@github.com:SeokRae/sr-blog-harness.git",
+  "license": "MIT",
+  "keywords": [
+    "blog",
+    "jekyll",
+    "writing-pipeline",
+    "fact-checking",
+    "editorial",
+    "publishing",
+    "claude-code",
+    "claude-code-plugin"
+  ],
+  "skills": [
+    "./skills/blog-pipeline"
+  ]
+}

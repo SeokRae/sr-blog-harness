@@ -1,0 +1,33 @@
+{
+  "name": "sr-blog-harness",
+  "owner": {
+    "name": "SeokRae",
+    "email": "kslbsh@gmail.com"
+  },
+  "metadata": {
+    "description": "블로그(~/IdeaProjects/blog) 포스트 작성부터 발행까지 조율하는 파이프라인 하네스를 제공하는 Claude Code 플러그인",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "sr-blog-harness",
+      "source": "./",
+      "description": "블로그(~/IdeaProjects/blog, SeokRae/blog, Jekyll + Type Theme) 포스트 작성부터 발행까지 조율하는 파이프라인 하네스",
+      "version": "0.1.0",
+      "author": {
+        "name": "SeokRae",
+        "email": "kslbsh@gmail.com"
+      },
+      "keywords": [
+        "blog",
+        "jekyll",
+        "writing-pipeline",
+        "fact-checking",
+        "editorial",
+        "publishing",
+        "claude-code",
+        "claude-code-plugin"
+      ]
+    }
+  ]
+}
