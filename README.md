@@ -18,6 +18,8 @@
 
 발행은 Issue → feature 브랜치 → PR(`Closes #N`)까지만 자동화한다. **main 직접 push·자동 merge는 하지 않는다 — merge는 사용자가 한다.**
 
+writer와 editor는 문단 배열 규칙(연쇄, 정박, 우산, 예고)을 공유 계약으로 씁니다. writer가 설계하고 editor가 점검하며, 근거와 체크리스트는 [`skills/blog-pipeline/references/paragraph-cohesion.md`](skills/blog-pipeline/references/paragraph-cohesion.md)에 있어요.
+
 ## 설치
 
 ```
