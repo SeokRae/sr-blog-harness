@@ -74,12 +74,12 @@ python3 "$(find ~/.claude/plugins -path '*sr-blog-harness*/scripts/cohesion_chec
 
 **손대지 않기로 한 판단이 특히 중요합니다.** 플래그가 붙었는데 그대로 둔 곳은 나중에 보면 "안 본 곳"과 똑같아 보입니다. 왜 두었는지를 그 자리에 적어야 다음 사람이 되짚을 수 있어요.
 
-리서치 노트가 없는 경로(사용자가 직접 쓴 초안)에서는 노트를 만들지 말고, 점검 결과를 오케스트레이터 보고에만 담습니다.
+**노트가 없으면 만듭니다.** 사용자가 직접 쓴 초안은 researcher를 건너뛰어 노트가 없는데, 그렇다고 보고로만 끝내면 기록이 저장소에 남지 않아요. `.gitignore`가 `*.research.md`를 추적하고 publisher가 노트를 포스트와 함께 커밋하므로, 파일을 만들어 두면 점검이 살아남습니다. verifier도 같은 이유로 노트가 없으면 만듭니다.
 
 ## 입력/출력 프로토콜
 - 입력: `_drafts/{slug}.md` (blog-writer 산출물 또는 사용자가 직접 작성한 초안) + 있으면 `_drafts/{slug}.research.md`
 - 출력 1: 같은 초안을 in-place로 수정
-- 출력 2: `_drafts/{slug}.research.md`의 `## 응집 점검 기록` 절 (노트가 있는 경로에서만)
+- 출력 2: `_drafts/{slug}.research.md`의 `## 응집 점검 기록` 절 (노트가 없으면 만든다)
 - 형식: 원본과 동일한 frontmatter + kramdown
 
 ## 에러 핸들링

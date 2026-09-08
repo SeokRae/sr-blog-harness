@@ -82,7 +82,7 @@ editor는 내용을 추가하지 않습니다. 그래서 우산 문장은 **문�
 
 ## 점검 재료는 스크립트로 뽑는다
 
-editor는 `scripts/cohesion_check.py`로 점검 재료를 먼저 뽑습니다.
+writer는 초안을 저장한 뒤, editor는 윤문을 시작하기 전에 `scripts/cohesion_check.py`로 점검 재료를 뽑습니다.
 
 ```bash
 python3 "$(find ~/.claude/plugins -path '*sr-blog-harness*/scripts/cohesion_check.py' | head -1)" _drafts/{slug}.md
@@ -96,11 +96,13 @@ python3 "$(find ~/.claude/plugins -path '*sr-blog-harness*/scripts/cohesion_chec
 
 ## 점검 결과는 노트에 남긴다
 
-`_drafts/{slug}.research.md`의 `## 응집 점검 기록` 절에 남깁니다. verifier의 `## 검증 기록`과 같은 구조예요. #16에서 확인된 실패, 즉 확인은 했는데 무엇을 확인했는지가 안 남아 점검하지 않은 것과 구분되지 않는 문제를 막습니다.
+`_drafts/{slug}.research.md`의 `## 응집 점검 기록` 절에 남깁니다. verifier의 `## 검증 기록`과 같은 구조이고, **노트가 없으면 만드는 것까지 같습니다.** 사용자가 직접 쓴 초안은 researcher를 건너뛰어 노트가 없는데, 보고로만 끝내면 기록이 저장소에 안 남아요. #16에서 확인된 실패, 즉 확인은 했는데 무엇을 확인했는지가 안 남아 점검하지 않은 것과 구분되지 않는 문제를 막습니다.
 
 특히 **플래그가 붙었는데 손대지 않기로 한 판단**을 적습니다. 그대로 둔 곳은 나중에 보면 안 본 곳과 구분되지 않아요.
 
-## 점검 체크리스트 (editor 전용)
+## 점검 체크리스트
+
+editor가 윤문 전에 확인합니다. writer는 초안 저장 직후 예고 사슬, 정박 한도, 우산 문장 세 항목만 봐요. 나머지는 문장 표현이 걸린 문제라 editor의 몫입니다.
 
 전 문단을 고르게 훑지 않습니다. 예고 사슬을 먼저 보고, 세 항목 이상 나열 문단과 다섯 문장을 넘는 문단을 그다음에 봅니다. 나머지는 읽다가 걸리는 곳만 봐요.
 

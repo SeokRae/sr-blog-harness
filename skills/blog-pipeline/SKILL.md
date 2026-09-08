@@ -18,7 +18,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 | blog-researcher | blog-researcher (커스텀) | 주제 → 근거 수집 (내부 1차·외부 2차) | `_drafts/{slug}.research.md` |
 | blog-writer | blog-writer (커스텀) | 근거 노트 → 초안 작성 | `_drafts/{slug}.md` |
 | blog-verifier | blog-verifier (커스텀) | `(확인 필요)` 플래그·사실 검증 | `_drafts/{slug}.md` (in-place) + `_drafts/{slug}.research.md`의 `## 검증 기록` |
-| blog-editor | blog-editor (커스텀) | 초안 윤문 + 문단 응집 점검 | `_drafts/{slug}.md` (in-place) + `_drafts/{slug}.research.md`의 `## 응집 점검 기록` |
+| blog-editor | blog-editor (커스텀) | 초안 윤문 + 문단 응집 점검 | `_drafts/{slug}.md` (in-place) + `_drafts/{slug}.research.md`의 `## 응집 점검 기록` (노트가 없으면 만든다) |
 | blog-publisher | blog-publisher (커스텀) | 발행 검증 + git push + 배포 확인 | `_posts/{date}-{slug}.md` + 배포 URL |
 
 모든 Agent 호출에 `model: "opus"`를 명시한다.
@@ -30,7 +30,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 | 단계 | 소주제 이름을 어떻게 다루나 |
 |------|---------------------------|
 | researcher | 인사이트 후보를 2~4개로 묶어 이름을 짓고 노트의 `## 소주제 이름 후보`에 표기를 확정한다 |
-| writer | 그 이름으로 도입부에서 예고하고 소제목에 쓴다. 초안 하단에 `<!-- 작성자 노트: 소주제 이름 = A \| B \| C -->`를 남긴다 |
+| writer | 그 이름으로 도입부에서 예고하고 소제목에 쓴다. 초안 하단에 `<!-- 작성자 노트: 소주제 이름 = A \| B \| C -->`를 남기고, `cohesion_check.py`로 자기 점검한다 |
 | verifier | 이름 표기를 바꾸지 않는다. 표기가 사실로 틀렸을 때만 본문과 주석을 함께 고치고 보고한다 |
 | editor | `scripts/cohesion_check.py`로 대조하고, 결과를 노트의 `## 응집 점검 기록`에 남긴다 |
 | publisher | 발행 시 `<!-- 작성자 노트 -->`를 제거하므로 독자에게는 노출되지 않는다 |
@@ -58,6 +58,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 
 `Agent(prompt: "{주제/키워드/참고자료} · 리서치 노트: _drafts/{slug}.research.md", subagent_type: "blog-writer", model: "opus")`
 → 결과: `_drafts/{slug}.md` (리서치 노트가 있으면 그것을 1차 근거로 삼아 작성)
+→ writer가 저장 직후 `scripts/cohesion_check.py`로 배열을 자기 점검한다. 예고 사슬과 정박 한도, 우산 문장만 본다. 문장 다듬기는 editor의 몫이다.
 
 ### Phase 1.5: 사실 검증
 
