@@ -18,7 +18,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 | blog-researcher | blog-researcher (커스텀) | 주제 → 근거 수집 (내부 1차·외부 2차) | `_drafts/{slug}.research.md` |
 | blog-writer | blog-writer (커스텀) | 근거 노트 → 초안 작성 | `_drafts/{slug}.md` |
 | blog-verifier | blog-verifier (커스텀) | `(확인 필요)` 플래그·사실 검증 | `_drafts/{slug}.md` (in-place) + `_drafts/{slug}.research.md`의 `## 검증 기록` |
-| blog-editor | blog-editor (커스텀) | 초안 윤문 | `_drafts/{slug}.md` (in-place) |
+| blog-editor | blog-editor (커스텀) | 초안 윤문 + 문단 응집 점검 | `_drafts/{slug}.md` (in-place) + `_drafts/{slug}.research.md`의 `## 응집 점검 기록` |
 | blog-publisher | blog-publisher (커스텀) | 발행 검증 + git push + 배포 확인 | `_posts/{date}-{slug}.md` + 배포 URL |
 
 모든 Agent 호출에 `model: "opus"`를 명시한다.
@@ -32,7 +32,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 | researcher | 인사이트 후보를 2~4개로 묶어 이름을 짓고 노트의 `## 소주제 이름 후보`에 표기를 확정한다 |
 | writer | 그 이름으로 도입부에서 예고하고 소제목에 쓴다. 초안 하단에 `<!-- 작성자 노트: 소주제 이름 = A \| B \| C -->`를 남긴다 |
 | verifier | 이름 표기를 바꾸지 않는다. 표기가 사실로 틀렸을 때만 본문과 주석을 함께 고치고 보고한다 |
-| editor | 주석의 이름과 도입부, 소제목을 대조하고 불일치를 점검 결과로 보고한다 |
+| editor | `scripts/cohesion_check.py`로 대조하고, 결과를 노트의 `## 응집 점검 기록`에 남긴다 |
 | publisher | 발행 시 `<!-- 작성자 노트 -->`를 제거하므로 독자에게는 노출되지 않는다 |
 
 이 사슬이 끊기면 증상은 하나로 나타납니다. 도입부가 예고한 것과 본문 소제목이 다른 글이 나가요. 근거와 점검 체크리스트, 그리고 기존 규칙(AI 문투 배제, 내용 불변, 인사이트 컨셉)과 충돌하는 지점의 해소안은 [`references/paragraph-cohesion.md`](references/paragraph-cohesion.md)에 있습니다. 각 에이전트 정의에 필요한 요약이 들어 있으므로 평소에는 따로 읽히지 않아도 되고, 규칙을 고칠 때 이 파일이 기준입니다.
@@ -70,7 +70,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 
 `Agent(prompt: "_drafts/{slug}.md 윤문", subagent_type: "blog-editor", model: "opus")`
 → 윤문된 초안을 사용자에게 보여주고 확인받는다. **발행 전 필수 체크포인트다 — 승인 없이 자동으로 다음 단계로 넘어가지 않는다.**
-→ editor의 **문단 응집 점검 결과**(배열을 손본 문단 수, 편집자 노트로 넘긴 항목 수)를 함께 보고한다. "우산 문장 필요"나 예고 이름 불일치가 노트로 남아 있으면 목록으로 보여준다. editor는 새 사실을 만들어 넣지 않으므로 이 항목들은 사용자가 결정한다.
+→ editor의 **문단 응집 점검 결과**(예고 사슬 일치 여부, 배열을 손본 문단 수, 유지 판단 수, 편집자 노트 수)를 함께 보고한다. 점검 근거는 `_drafts/{slug}.research.md`의 `## 응집 점검 기록`에 남는다. "우산 문장 필요"나 예고 이름 불일치가 노트로 남아 있으면 목록으로 보여준다. editor는 새 사실을 만들어 넣지 않으므로 이 항목들은 사용자가 결정한다.
 
 ### Phase 3: 발행
 
