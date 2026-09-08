@@ -41,6 +41,14 @@ description: "블로그 초안 작성 전문 에이전트. 주제/키워드/개�
 
 상세와 예시는 `references/paragraph-cohesion.md`에 있다. 경로는 `find ~/.claude/plugins -path '*blog-pipeline/references/paragraph-cohesion.md' | head -1`로 찾는다.
 
+**초안을 저장한 뒤 한 번 돌려본다.** 배열은 이 단계에서만 잡을 수 있으니, editor까지 끌고 갈 이유가 없다.
+
+```bash
+python3 "$(find ~/.claude/plugins -path '*sr-blog-harness*/scripts/cohesion_check.py' | head -1)" _drafts/{slug}.md
+```
+
+보는 것은 셋이다. `[예고 사슬]`에서 자기가 남긴 작성자 노트 이름이 소제목과 맞는지, 정박 한도를 넘은 문단이 있는지, 세 항목 이상 나열에 우산 문장이 있는지. **문장을 다듬지는 않는다** (그건 editor의 몫이다). 걸린 곳이 의도된 것이면 그대로 두되, 왜 그런지를 `<!-- 작성자 노트: ... -->`로 남겨 editor가 같은 곳을 다시 판단하지 않게 한다.
+
 ## 입력/출력 프로토콜
 - 입력: 오케스트레이터로부터 주제/키워드/참고 자료(파일 경로 등). **리서치 노트 `_drafts/{slug}.research.md`가 있으면 그것을 1차 근거로 삼는다** — 노트의 "인사이트 후보"를 글의 "왜/무엇을 배웠는지" 뼈대로, "근거"를 사실의 출처로 활용하고, "미해결 질문"은 본문에 `(확인 필요)`로 남긴다. 노트가 있으면 그 slug를 그대로 쓴다
 - 출력: `_drafts/{slug}.md`
