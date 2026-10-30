@@ -80,6 +80,7 @@ description: "블로그(~/IdeaProjects/blog, SeokRae/blog) 포스트 작성부�
 → 결과: 내부 주석 정리(작성자·편집자·검증 노트 제거) → `_posts/`로 이동 → **Issue 생성 → main에서 feature 브랜치 분기 → 커밋 → PR(`Closes #N`) 생성**. main 직접 push·자동 merge는 하지 않는다 — **merge는 사용자가 한다.**
 → merge가 완료되면 Pages 빌드·배포 URL을 확인해 보고한다(merge 전이면 PR URL 보고 후 대기).
 → 본문에 `(확인 필요)` 미해소 마커가 남아 있으면 publisher가 발행을 멈추고 보고한다.
+→ 빌드 뒤 `scripts/asset_check.py`로 포스트가 참조하는 저장소 파일을 점검한다. `미추적` 파일은 포스트와 같은 커밋에 넣고, `없음`(깨진 참조)이 나오면 발행을 멈추고 보고한다. 그림 형태와 계약은 [`references/figure-embed.md`](references/figure-embed.md)에 있다 (#7).
 
 ### Phase 4: 결과 보고
 
