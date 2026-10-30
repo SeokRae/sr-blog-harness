@@ -20,6 +20,8 @@
 
 writer와 editor는 문단 배열 규칙(연쇄, 정박, 우산, 예고)을 공유 계약으로 씁니다. writer가 설계하고 editor가 [`scripts/cohesion_check.py`](scripts/cohesion_check.py)로 점검 재료를 뽑아 판단하며, 결과는 리서치 노트의 `## 응집 점검 기록`에 남습니다. 스크립트는 판정자가 아니라 어디를 볼지 좁혀 주는 보조 도구예요. 근거와 체크리스트는 [`skills/blog-pipeline/references/paragraph-cohesion.md`](skills/blog-pipeline/references/paragraph-cohesion.md)에 있습니다.
 
+그림을 넣는 글은 [`skills/blog-pipeline/references/figure-embed.md`](skills/blog-pipeline/references/figure-embed.md)의 두 형태(인라인 SVG, iframe HTML)를 따릅니다. publisher는 빌드 뒤 [`scripts/asset_check.py`](scripts/asset_check.py)로 포스트가 참조하는 저장소 파일이 커밋 대상에 들어갔는지 확인해요. 로컬 빌드는 커밋하지 않은 파일도 읽어 통과하기 때문에, 이 점검이 없으면 Pages에서만 404가 납니다.
+
 ## 설치
 
 ```
