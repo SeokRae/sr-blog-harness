@@ -39,6 +39,19 @@ writer와 editor는 문단 배열 규칙(연쇄, 정박, 우산, 예고)을 공�
 
 세부 흐름·에러 핸들링은 [`skills/blog-pipeline/SKILL.md`](skills/blog-pipeline/SKILL.md) 참고.
 
+## 버전과 로컬 반영
+
+에이전트, 스킬, 스크립트를 바꾸는 PR은 버전도 함께 올립니다. `.claude-plugin/plugin.json`의 `version`, `.claude-plugin/marketplace.json`의 `metadata.version`과 `plugins[0].version`, 세 곳을 같은 값으로 맞춰요. `claude plugin update`는 버전으로 새것인지 판단하므로, 버전이 그대로면 머지한 변경이 설치본에 내려오지 않습니다. 0.1.0에 머물렀던 동안 실제로 그랬어요 (#9).
+
+머지한 뒤에는 이 순서로 반영합니다.
+
+```bash
+claude plugin marketplace update sr-blog-harness
+claude plugin update sr-blog-harness@sr-blog-harness
+```
+
+반영이 끝나면 세션을 다시 시작합니다. 에이전트 정의는 세션을 시작할 때 로드돼요.
+
 ## 출처
 
 원래 `~/IdeaProjects/blog` 저장소의 `.claude/agents`, `.claude/skills/blog-pipeline`으로 프로젝트 로컬에 있던 것을 이 플러그인으로 이관했다 (2026-07-29).
