@@ -2,13 +2,15 @@
 
 > `~/IdeaProjects/blog`(SeokRae/blog, Jekyll + Type Theme) 전용 블로그 글쓰기 **파이프라인 하네스** — 근거 수집부터 발행까지 조율하는 Claude Code 플러그인.
 
-주제 하나를 던지면 근거 수집(researcher) → 초안 작성(writer) → 사실 검증(verifier) → 윤문(editor) → 발행(publisher)까지 순차로 이어받아 처리한다. 각 단계는 전용 서브 에이전트가 맡고, 산출물은 `_drafts/{slug}.md`(+`.research.md`)를 거쳐 `_posts/`로 옮겨진다.
+주제 하나를 던지면 근거 수집(researcher) → 초안 작성(writer) → 사실 검증(verifier) → 윤문(editor) → 발행(publisher)까지 이어받아 처리한다. 각 단계는 전용 에이전트가 맡고, 산출물은 `_drafts/{slug}.md`(+`.research.md`)를 거쳐 `_posts/`로 옮겨진다.
+
+writer, verifier, editor는 이름을 붙여 띄운 팀원입니다. 검증이나 윤문에서 앞 단계로 되돌아갈 때 새 에이전트를 띄우지 않고 `SendMessage`로 그 팀원을 다시 깨워요. 회차마다 결과는 리서치 노트의 `## 되돌림 기록`에 남습니다. researcher와 publisher는 앞뒤로 한 번씩만 도는 단계라 단발 호출로 남겼어요. 이유와 통신 형식은 [`SKILL.md`](skills/blog-pipeline/SKILL.md)의 실행 모드, 팀 통신 절에 있습니다.
 
 이 하네스는 범용이 아니라 `~/IdeaProjects/blog` 한 저장소를 대상으로 만들어졌다 — 경로·레포·발행 정책이 하드코딩돼 있다.
 
 ## 파이프라인
 
-| 단계 | 서브 에이전트 | 역할 | 산출물 |
+| 단계 | 에이전트 | 역할 | 산출물 |
 |------|--------------|------|--------|
 | 0.5 근거 수집 | `blog-researcher` | 내부(코드·git log) 1차 + 외부 2차 근거 수집 | `_drafts/{slug}.research.md` |
 | 1 초안 작성 | `blog-writer` | 리서치 노트를 근거로 초안 작성 | `_drafts/{slug}.md` |
