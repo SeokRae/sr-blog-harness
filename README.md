@@ -4,7 +4,7 @@
 
 주제 하나를 던지면 근거 수집(researcher) → 초안 작성(writer) → 사실 검증(verifier) → 윤문(editor) → 발행(publisher)까지 이어받아 처리한다. 각 단계는 전용 에이전트가 맡고, 산출물은 `_drafts/{slug}.md`(+`.research.md`)를 거쳐 `_posts/`로 옮겨진다.
 
-writer, verifier, editor는 이름을 붙여 띄운 팀원입니다. 검증이나 윤문에서 앞 단계로 되돌아갈 때 새 에이전트를 띄우지 않고 `SendMessage`로 그 팀원을 다시 깨워요. 회차마다 결과는 리서치 노트의 `## 되돌림 기록`에 남습니다. researcher와 publisher는 앞뒤로 한 번씩만 도는 단계라 단발 호출로 남겼어요. 이유와 통신 형식은 [`SKILL.md`](skills/blog-pipeline/SKILL.md)의 실행 모드, 팀 통신 절에 있습니다.
+writer, verifier, editor는 이름을 붙여 띄운 팀원입니다. 검증이나 윤문에서 앞 단계로 되돌아갈 때 새 에이전트를 띄우지 않고 `SendMessage`로 그 팀원을 다시 깨워요. 회차마다 결과는 리서치 노트의 `## 되돌림 기록`에 남습니다. researcher와 publisher는 앞뒤로 한 번씩만 도는 단계라 단발 호출로 남겼어요. 이유는 [`SKILL.md`](skills/blog-pipeline/SKILL.md)의 실행 모드 절에, 통신 형식과 설치 뒤 확인 절차는 [`references/team-protocol.md`](skills/blog-pipeline/references/team-protocol.md)에 있습니다. 되돌림에 든 토큰은 [`scripts/team_token_usage.py`](scripts/team_token_usage.py)로 세션 transcript에서 에이전트별, 회차별로 잴 수 있어요.
 
 이 하네스는 범용이 아니라 `~/IdeaProjects/blog` 한 저장소를 대상으로 만들어졌다 — 경로·레포·발행 정책이 하드코딩돼 있다.
 
