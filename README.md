@@ -24,6 +24,8 @@ writer와 editor는 문단 배열 규칙(연쇄, 정박, 우산, 예고)을 공�
 
 그림을 넣는 글은 [`skills/blog-pipeline/references/figure-embed.md`](skills/blog-pipeline/references/figure-embed.md)의 두 형태(인라인 SVG, iframe HTML)를 따릅니다. publisher는 빌드 뒤 [`scripts/asset_check.py`](scripts/asset_check.py)로 포스트가 참조하는 저장소 파일이 커밋 대상에 들어갔는지 확인해요. 로컬 빌드는 커밋하지 않은 파일도 읽어 통과하기 때문에, 이 점검이 없으면 Pages에서만 404가 납니다.
 
+리서치 노트는 포스트와 함께 공개 저장소에 커밋됩니다. researcher와 verifier는 출처를 적을 때 절대 홈 경로, 비공개 저장소 이름과 커밋 해시, 세션 기록 경로를 라벨로 바꿔 적어요. 리드는 승인 요청 전에, publisher는 커밋 전에 [`scripts/privacy_check.py`](scripts/privacy_check.py)로 포스트와 노트를 점검합니다. push한 뒤에는 파일을 고쳐도 이력에 남기 때문에 커밋 전에 막아야 해요. 규칙은 [`skills/blog-pipeline/references/privacy.md`](skills/blog-pipeline/references/privacy.md)에 있습니다.
+
 ## 설치
 
 ```
